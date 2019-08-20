@@ -8,23 +8,30 @@ import java.util.StringTokenizer;
 
 public class ParserMain {
 
-    public static final String fileName = "";
+    public static final String FILE_NAME = "";
 
     public static void main(String[] args) {
+        String fileString = fileToString(FILE_NAME);
+        StringTokenizer tokenizer = new StringTokenizer(fileString, "<", true);
+
+        while (tokenizer.hasMoreTokens()) {
+            tokenizer.nextToken();
+        }
+
+    }
+
+    public static String fileToString(String fileName) {
         FileReader reader = loadFile(fileName);
         StringBuilder builder = new StringBuilder();
-        StringTokenizer tokenizer = null;
         try {
             int currCharCode = reader.read();
             while (currCharCode != -1) {
                 builder.append(currCharCode);
             }
-            tokenizer = new StringTokenizer(builder.toString(), "<", true);
-            String tag = tokenizer.nextToken(">");
-            System.out.print(tag);
         } catch (IOException e) {
             System.out.println("Error reading file.");
         }
+        return builder.toString();
     }
 
     public static FileReader loadFile(String fileName) {
@@ -32,9 +39,17 @@ public class ParserMain {
         try {
             reader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + fileName);
+            throw new RuntimeException("File not found: " + fileName);
         }
         return reader;
+    }
+
+    public static String getTag(StringTokenizer tokenizer) {
+        return null;
+    }
+
+    public static String getBody(StringTokenizer tokenizer) {
+        return null;
     }
 
 }
