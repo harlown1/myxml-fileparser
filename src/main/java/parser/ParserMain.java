@@ -12,5 +12,4 @@ public class ParserMain {
         List<String> attrList = tree.getRoot().getChildren().get(0).getAllAttributeNames();
         System.out.println(tree.getRoot().getChildren().get(0).getAttributeValue(attrList.get(1)));
     }
-
 }

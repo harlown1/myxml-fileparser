@@ -1,20 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce3c376e-3a94-4160-ae83-c34dd3b172d4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/integration/ParsingTestDriver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/unit/XMLNodeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/unit/XMLTreeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/body-parse.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/self-close-tag-parse.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/tag-attributes-parse.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/tag-only-parse.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/unit-test-parse.xml" afterDir="false" />
+    <list default="true" id="ce3c376e-3a94-4160-ae83-c34dd3b172d4" name="Default Changelist" comment="Added skeleton code for testing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/ParseNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/XMLNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/ParseTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/XMLTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/parser/ParserMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/ParserMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +94,7 @@
       <workItem from="1566950576068" duration="15640000" />
       <workItem from="1567021362355" duration="3111000" />
       <workItem from="1567038599009" duration="11438000" />
-      <workItem from="1567126101954" duration="1144000" />
+      <workItem from="1567126101954" duration="9111000" />
     </task>
     <task id="LOCAL-00001" summary="Finished converting the file to a String Tokenizer">
       <created>1566329011822</created>
@@ -127,7 +117,21 @@
       <option name="project" value="LOCAL" />
       <updated>1566903987597</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Various changes to the main parser including being able to parse attributes.">
+      <created>1567130305038</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1567130305038</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added skeleton code for testing.">
+      <created>1567130351853</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1567130351853</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,6 +154,8 @@
     <MESSAGE value="Finished converting the file to a String Tokenizer" />
     <MESSAGE value="Finished the basic parser for xml with basic tag names and text bodies." />
     <MESSAGE value="Moved the parsing out of the main into ParseTree where it belongs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved the parsing out of the main into ParseTree where it belongs." />
+    <MESSAGE value="Various changes to the main parser including being able to parse attributes." />
+    <MESSAGE value="Added skeleton code for testing." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton code for testing." />
   </component>
 </project>
