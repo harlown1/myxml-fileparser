@@ -1,10 +1,8 @@
-<head>
+<head class="these need spaces too" type="" val="int">
     <child> This is body along with children.
-            <gchild> this is the body of a paragraph
-            </gchild>
-            <gchild> 2
-            </gchild>
-            <gchild> 3
-            </gchild>
+            <gchild> this is the body of a paragraph </gchild>
+            <gchild> 2 </gchild>
+            <gchild> 3 </gchild>
+        What happens if the text is here?
     </child>
 </head>

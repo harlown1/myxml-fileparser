@@ -3,21 +3,18 @@ package parser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
-public class ParseTree {
-    private ParseNode root;
+public class XMLTree {
+    private XMLNode root;
 
     /**
      * Creates a tree with a default root 'document' with no children, body, etc.
      */
-    public ParseTree() {
-        root = new ParseNode("document ");
+    public XMLTree() {
+        root = new XMLNode("document ");
     }
 
     /**
@@ -25,7 +22,7 @@ public class ParseTree {
      * @param fileName the name of the file to find and parse.
      * @return String The string representation of the XML file at the fileName.
      */
-    public static ParseTree parseFromFile(String fileName) {
+    public static XMLTree parseFromFile(String fileName) {
         String fileAsString = readFromFile(fileName);
         StringTokenizer tokenizer = new StringTokenizer(fileAsString, "<", true);
         return parseTokens(tokenizer);
@@ -56,9 +53,14 @@ public class ParseTree {
         return builder.toString();
     }
 
-    private static ParseTree parseTokens(StringTokenizer tokenizer) {
-        ParseTree tree = new ParseTree();
-        Stack<ParseNode> nodeStack = new Stack<>();
+    /**
+     * Parses the tokens made by the tokenizer using the tag delimiters.
+     * @param tokenizer the tokenizer with delimiters returned, starting with "<" as the first delimiter set.
+     * @return The parsed XMLTree.
+     */
+    private static XMLTree parseTokens(StringTokenizer tokenizer) {
+        XMLTree tree = new XMLTree();
+        Stack<XMLNode> nodeStack = new Stack<>();
         boolean nextIsTag = true;
         boolean openTag = true;
         while (tokenizer.hasMoreTokens()) {
@@ -79,38 +81,83 @@ public class ParseTree {
                 nodeStack.pop();
             } else if (openTag) { // Do opening tag processing
                 //Parse the tag to get all attributes
-
+                String[] spaceSeparatedTag = token.split(" ");
+                String tagName = spaceSeparatedTag[0]; //Extract the tag name
+                StringBuilder tagNoNameBuilder = new StringBuilder();
+                for (int i = 1; i < spaceSeparatedTag.length; i++) {
+                    tagNoNameBuilder.append(spaceSeparatedTag[i] + " ");
+                }
+                String tagNoName = tagNoNameBuilder.toString().trim();
                 //Create the node from the tag.
-                ParseNode currNode = new ParseNode(token);
+                XMLNode currNode = new XMLNode(tagName);
+                if (!"".equals(tagNoName.trim())) {
+                    parseAttributes(tagNoName, currNode);
+                }
                 if (!nodeStack.isEmpty()) {
-                    ParseNode parent = nodeStack.peek();
+                    XMLNode parent = nodeStack.peek();
                     parent.addChild(currNode);
                 } else {
                     tree.getRoot().addChild(currNode);
                 }
                 nodeStack.push(currNode);
             } else if (nextIsTag){ // Add things to the body
-                nodeStack.peek().setBody(token);
+                XMLNode topNode = nodeStack.peek();
+                topNode.setBody(topNode.getBody() + token);
             } else {
-                System.out.println("error");
+                throw new RuntimeException("Error parsing the file");
             }
         }
         return tree;
     }
 
+    /**
+     * Parses the attributes part of the tag.  The tag head must be removed before calling.
+     * @param attributesString
+     * @param node
+     */
+    private static void parseAttributes(String attributesString, XMLNode node) {
+        StringTokenizer tokenizer = new StringTokenizer(attributesString, "\"", true);
+        String lastAttrName = "";
+        boolean openAttr = false;
+        while (tokenizer.hasMoreTokens()) {
+            String currToken = tokenizer.nextToken().trim();
+            if ("\"".equals(currToken)) {
+                openAttr = !openAttr;
+            } else if (!openAttr) {
+                currToken = currToken.replace("=", "");
+                node.addAttributeName(currToken);
+                lastAttrName = currToken;
+            } else {
+                node.addValToAttribute(lastAttrName, currToken);
+            }
+        }
+    }
 
-    public ParseNode getRoot() {
+    /**
+     * Gets the root of the tree and returns the node. The root by default is named 'document'
+     * @return
+     */
+    public XMLNode getRoot() {
         return this.root;
     }
 
-    public String getNodeById() {
+    /**
+     * Gets the root of the tree with the given ID. ID's should be unique but isn't strictly enforced.  Any
+     * single node with the given ID will be returned if there are multiple. If no node with that ID is found,
+     * then null is returned.  Otherwise returns the node with the given ID.
+     * @return
+     */
+    public String getNodeById(String nodeId) {
         return null;
     }
 
-    public List<ParseNode> getNodesWithClass() {
+    /**
+     * Gets all the nodes that have the class of className.  WIll return an empty list if there are no nodes with
+     * the given class.
+     * @return List of all nodes with the given class.
+     */
+    public List<XMLNode> getNodesWithClass(String className) {
         return null;
     }
-
-
 
 }
