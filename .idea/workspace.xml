@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce3c376e-3a94-4160-ae83-c34dd3b172d4" name="Default Changelist" comment="Added skeleton code for testing.">
+    <list default="true" id="ce3c376e-3a94-4160-ae83-c34dd3b172d4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/parser/ParserMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/parser/ParserMain.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +93,10 @@
       <workItem from="1566950576068" duration="15640000" />
       <workItem from="1567021362355" duration="3111000" />
       <workItem from="1567038599009" duration="11438000" />
-      <workItem from="1567126101954" duration="9111000" />
+      <workItem from="1567126101954" duration="10163000" />
+      <workItem from="1567187470148" duration="704000" />
+      <workItem from="1567221925716" duration="612000" />
+      <workItem from="1567234600322" duration="6152000" />
     </task>
     <task id="LOCAL-00001" summary="Finished converting the file to a String Tokenizer">
       <created>1566329011822</created>
@@ -131,7 +133,21 @@
       <option name="project" value="LOCAL" />
       <updated>1567130351853</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added information about what qualifies as a well-formed file to the README">
+      <created>1567148934243</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1567148934243</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Edited the parser to align with the language definition now that I defined it.&#10;Also added a few more test file skeletons to implement later.">
+      <created>1567240362282</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1567240362282</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +172,8 @@
     <MESSAGE value="Moved the parsing out of the main into ParseTree where it belongs." />
     <MESSAGE value="Various changes to the main parser including being able to parse attributes." />
     <MESSAGE value="Added skeleton code for testing." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added skeleton code for testing." />
+    <MESSAGE value="Added information about what qualifies as a well-formed file to the README" />
+    <MESSAGE value="Edited the parser to align with the language definition now that I defined it.&#10;Also added a few more test file skeletons to implement later." />
+    <option name="LAST_COMMIT_MESSAGE" value="Edited the parser to align with the language definition now that I defined it.&#10;Also added a few more test file skeletons to implement later." />
   </component>
 </project>
