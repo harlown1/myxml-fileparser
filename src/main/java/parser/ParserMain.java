@@ -8,8 +8,8 @@ public class ParserMain {
 
     public static void main(String[] args) {
         XMLTree tree = XMLTree.parseFromFile(FILE_NAME);
-        System.out.println(tree.getRoot().getChildren().get(0).getTagName());//.getChildren().get(0).getBody());
-        List<String> attrList = tree.getRoot().getChildren().get(0).getAllAttributeNames();
-        System.out.println(tree.getRoot().getChildren().get(0).getAttributeValue(attrList.get(1)));
+        System.out.println(tree.getRoot().getTagName());
+//        List<String> attrList = tree.getRoot().getChildren().get(0).getAllAttributeNames();
+//        System.out.println(tree..get(0).getAttributeValue(attrList.get(1)));
     }
 }

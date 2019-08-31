@@ -3,18 +3,17 @@ package parser;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class XMLTree {
     private XMLNode root;
+    private List<XMLNode> metaNodes;
 
-    /**
-     * Creates a tree with a default root 'document' with no children, body, etc.
-     */
     public XMLTree() {
-        root = new XMLNode("document ");
+        metaNodes = new ArrayList<>();
     }
 
     /**
@@ -68,46 +67,61 @@ public class XMLTree {
             token = token.trim();
             if ("".equals(token)) {
                 //Do nothing...
-            } else if ("<".equals(token)) { //Open a tag
+            } else if (nodeStack.isEmpty() && token.startsWith("?")) { // Meta/header tag.
+                XMLNode currNode = parseOpenTag(token);
+                tree.addMetaNode(currNode);
+            } else if ("<".equals(token)) { // Open a tag
                 nextIsTag = !nextIsTag;
                 openTag = true;
-            } else if (">".equals(token)) { //Close a tag
+            } else if (">".equals(token)) { // Close a tag
                 nextIsTag = !nextIsTag;
                 openTag = false;
-            } else if (token.startsWith("/") && openTag) { //Do closing tag stuff
+            } else if (token.startsWith("/") && openTag) { // Do closing tag stuff
                 if (!nodeStack.peek().getTagName().equals(token.substring(1))) {
                     throw new RuntimeException("Invalid file format: Tag not closed " + nodeStack.peek().getTagName());
                 }
                 nodeStack.pop();
             } else if (openTag) { // Do opening tag processing
-                //Parse the tag to get all attributes
-                String[] spaceSeparatedTag = token.split(" ");
-                String tagName = spaceSeparatedTag[0]; //Extract the tag name
-                StringBuilder tagNoNameBuilder = new StringBuilder();
-                for (int i = 1; i < spaceSeparatedTag.length; i++) {
-                    tagNoNameBuilder.append(spaceSeparatedTag[i] + " ");
-                }
-                String tagNoName = tagNoNameBuilder.toString().trim();
-                //Create the node from the tag.
-                XMLNode currNode = new XMLNode(tagName);
-                if (!"".equals(tagNoName.trim())) {
-                    parseAttributes(tagNoName, currNode);
-                }
+                // Parse the tag to get name and all attributes
+                XMLNode currNode = parseOpenTag(token);
                 if (!nodeStack.isEmpty()) {
                     XMLNode parent = nodeStack.peek();
                     parent.addChild(currNode);
                 } else {
-                    tree.getRoot().addChild(currNode);
+                    XMLNode root = tree.getRoot();
+                    if (root != null) {
+                        throw new RuntimeException("File has more than one root defined");
+                    }
+                    tree.setRoot(currNode);
                 }
                 nodeStack.push(currNode);
-            } else if (nextIsTag){ // Add things to the body
+            } else if (nextIsTag) { // Add things to the body
                 XMLNode topNode = nodeStack.peek();
                 topNode.setBody(topNode.getBody() + token);
             } else {
                 throw new RuntimeException("Error parsing the file");
             }
         }
+        if (tree.getRoot() == null) {
+            throw new RuntimeException("Error parsing the file");
+        }
         return tree;
+    }
+
+    private static XMLNode parseOpenTag(String tagContents) {
+        String[] spaceSeparatedTag = tagContents.split(" ");
+        String tagName = spaceSeparatedTag[0]; // Extract the tag name
+        StringBuilder tagNoNameBuilder = new StringBuilder();
+        for (int i = 1; i < spaceSeparatedTag.length; i++) {
+            tagNoNameBuilder.append(spaceSeparatedTag[i] + " ");
+        }
+        String tagNoName = tagNoNameBuilder.toString().trim();
+        //Create the node from the tag.
+        XMLNode currNode = new XMLNode(tagName);
+        if (!"".equals(tagNoName.trim())) {
+            parseAttributes(tagNoName, currNode);
+        }
+        return currNode;
     }
 
     /**
@@ -139,6 +153,18 @@ public class XMLTree {
      */
     public XMLNode getRoot() {
         return this.root;
+    }
+
+    public void setRoot(XMLNode root) {
+        this.root = root;
+    }
+
+    public void addMetaNode(XMLNode metaNode) {
+        metaNodes.add(metaNode);
+    }
+
+    public List<XMLNode> getMetaNodes() {
+        return metaNodes;
     }
 
     /**
