@@ -1,0 +1,24 @@
+<?doc type="MyXML">
+<head title="title" type="" value="all the values">
+    <child>
+        main test child!
+        <grandchild id="favorite" class="spoiled">
+            <name>Jessica Day</name>
+            <favorites>
+                <color>Blue</color>
+                <subject>Math</subject>
+            </favorites>
+        </grandchild>
+        <grandchild class="spoiled">
+            <name>Nick</name>
+        </grandchild>
+        <grandchild>
+            <name>Schmidt</name>
+        </grandchild>
+        <grandchild>
+            <name>Winnie</name>
+        </grandchild>
+    </child>
+    <brother></brother>
+    <sister class="spoiled"></sister>
+</head>

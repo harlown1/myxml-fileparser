@@ -31,6 +31,8 @@ public class XMLTree {
      * Takes the given filename and reads in the file as a String that can be tokenized and parsed.
      * @param fileName the file name to parse.
      * @return The file as a String.
+     * @throws RuntimeException is thrown under some errors, but if the file isn't well defined
+     *                          or well formed, nothing is guaranteed.
      */
     private static String readFromFile(String fileName) {
         FileReader reader = null;
@@ -173,7 +175,7 @@ public class XMLTree {
      * then null is returned.  Otherwise returns the node with the given ID.
      * @return
      */
-    public String getNodeById(String nodeId) {
+    public XMLNode getNodeById(String nodeId) {
         return null;
     }
 
